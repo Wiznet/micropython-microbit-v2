@@ -1,0 +1,201 @@
+diff --git a/extmod/network_wiznet5k.c b/extmod/network_wiznet5k.c
+index eed656ee2..e323a7758 100644
+--- a/extmod/network_wiznet5k.c
++++ b/extmod/network_wiznet5k.c
+@@ -75,6 +75,13 @@
+ #include "lib/wiznet5k/Internet/DHCP/dhcp.h"
+ 
+ #endif
++#if (_WIZCHIP_ ==W5500)
++#include "lib/wiznet5k/Ethernet/W5500/w5500.h"
++#elif (_WIZCHIP_ == W5100S)
++#include "lib/wiznet5k/Ethernet/W5100S/w5100s.h"
++#endif
++
++#include "modmicrobit.h"
+ 
+ #ifndef printf
+ #define printf(...) mp_printf(MP_PYTHON_PRINTER, __VA_ARGS__)
+@@ -123,19 +130,21 @@ typedef struct _wiznet5k_obj_t {
+ STATIC wiznet5k_obj_t wiznet5k_obj;
+ 
+ STATIC void wiz_cris_enter(void) {
+-    wiznet5k_obj.cris_state = MICROPY_BEGIN_ATOMIC_SECTION();
++   //wiznet5k_obj.cris_state = MICROPY_BEGIN_ATOMIC_SECTION();
+ }
+ 
+ STATIC void wiz_cris_exit(void) {
+-    MICROPY_END_ATOMIC_SECTION(wiznet5k_obj.cris_state);
++   //MICROPY_END_ATOMIC_SECTION(wiznet5k_obj.cris_state);
+ }
+ 
+ STATIC void wiz_cs_select(void) {
+-    mp_hal_pin_low(wiznet5k_obj.cs);
++    microbit_wiznet_ctrl_cs(0);
++
+ }
+ 
+ STATIC void wiz_cs_deselect(void) {
+-    mp_hal_pin_high(wiznet5k_obj.cs);
++    microbit_wiznet_ctrl_cs(1);
++
+ }
+ 
+ void mpy_wiznet_yield(void) {
+@@ -148,21 +157,22 @@ void mpy_wiznet_yield(void) {
+ }
+ 
+ STATIC void wiz_spi_read(uint8_t *buf, uint16_t len) {
+-    wiznet5k_obj.spi_transfer(wiznet5k_obj.spi, len, buf, buf);
++    microbit_hal_spi_transfer(len, buf, buf);  
+ }
+ 
+ STATIC void wiz_spi_write(const uint8_t *buf, uint16_t len) {
+-    wiznet5k_obj.spi_transfer(wiznet5k_obj.spi, len, buf, NULL);
++    microbit_hal_spi_transfer(len, buf, NULL);
+ }
+ 
+ STATIC uint8_t wiz_spi_readbyte() {
+     uint8_t buf = 0;
+-    wiznet5k_obj.spi_transfer(wiznet5k_obj.spi, 1, &buf, &buf);
++    microbit_hal_spi_transfer(1, &buf, &buf);
++
+     return buf;
+ }
+ 
+ STATIC void wiz_spi_writebyte(const uint8_t buf) {
+-    wiznet5k_obj.spi_transfer(wiznet5k_obj.spi, 1, &buf, NULL);
++    microbit_hal_spi_transfer(1, &buf, NULL);
+ }
+ 
+ STATIC void wiznet5k_get_mac_address(wiznet5k_obj_t *self, uint8_t mac[6]) {
+@@ -683,9 +693,6 @@ STATIC void wiznet5k_dhcp_init(wiznet5k_obj_t *self) {
+ // WIZNET5K(spi, pin_cs, pin_rst[, pin_intn])
+ // Create and return a WIZNET5K object.
+ STATIC mp_obj_t wiznet5k_make_new(const mp_obj_type_t *type, size_t n_args, size_t n_kw, const mp_obj_t *args) {
+-    mp_obj_base_t *spi;
+-    mp_hal_pin_obj_t cs;
+-    mp_hal_pin_obj_t rst;
+ 
+     #if WIZNET5K_WITH_LWIP_STACK
+     mp_hal_pin_obj_t pin_intn = (mp_hal_pin_obj_t)NULL;
+@@ -699,22 +706,9 @@ STATIC mp_obj_t wiznet5k_make_new(const mp_obj_type_t *type, size_t n_args, size
+     // Allow auto-configuration of SPI if defined for board and no args passed
+     if (n_args == 0 && n_kw == 0) {
+         // Initialize SPI.
+-        mp_obj_t spi_obj = MP_OBJ_NEW_SMALL_INT(MICROPY_HW_WIZNET_SPI_SCK);
+-        mp_obj_t miso_obj = MP_OBJ_NEW_SMALL_INT(MICROPY_HW_WIZNET_SPI_MISO);
+-        mp_obj_t mosi_obj = MP_OBJ_NEW_SMALL_INT(MICROPY_HW_WIZNET_SPI_MOSI);
+-        mp_obj_t args[] = {
+-            MP_OBJ_NEW_SMALL_INT(MICROPY_HW_WIZNET_SPI_ID),
+-            MP_OBJ_NEW_SMALL_INT(MICROPY_HW_WIZNET_SPI_BAUDRATE),
+-            MP_ROM_QSTR(MP_QSTR_sck), mp_pin_make_new(NULL, 1, 0, &spi_obj),
+-            MP_ROM_QSTR(MP_QSTR_miso), mp_pin_make_new(NULL, 1, 0, &miso_obj),
+-            MP_ROM_QSTR(MP_QSTR_mosi), mp_pin_make_new(NULL, 1, 0, &mosi_obj),
+-        };
+-        spi = MP_OBJ_TO_PTR(MP_OBJ_TYPE_GET_SLOT(&machine_spi_type, make_new)((mp_obj_t)&machine_spi_type, 2, 3, args));
++	microbit_wiznet_init();
+ 
+-        cs = mp_hal_get_pin_obj(mp_pin_make_new(NULL, 1, 0, (mp_obj_t[]) {MP_OBJ_NEW_SMALL_INT(MICROPY_HW_WIZNET_PIN_CS)}));
+-        rst = mp_hal_get_pin_obj(mp_pin_make_new(NULL, 1, 0, (mp_obj_t[]) {MP_OBJ_NEW_SMALL_INT(MICROPY_HW_WIZNET_PIN_RST)}));
+-        #if WIZNET5K_WITH_LWIP_STACK && defined(MICROPY_HW_WIZNET_PIN_INTN)
+-        pin_intn = mp_hal_get_pin_obj(mp_pin_make_new(NULL, 1, 0, (mp_obj_t[]) {MP_OBJ_NEW_SMALL_INT(MICROPY_HW_WIZNET_PIN_INTN)}));
++   #if WIZNET5K_WITH_LWIP_STACK && defined(MICROPY_HW_WIZNET_PIN_INTN)
+         use_interrupt = true;
+         #endif
+ 
+@@ -727,9 +721,7 @@ STATIC mp_obj_t wiznet5k_make_new(const mp_obj_type_t *type, size_t n_args, size
+         #else
+         mp_arg_check_num(n_args, n_kw, 3, 3, false);
+         #endif
+-        spi = mp_hal_get_spi_obj(args[0]);
+-        cs = mp_hal_get_pin_obj(args[1]);
+-        rst = mp_hal_get_pin_obj(args[2]);
++
+         #if WIZNET5K_WITH_LWIP_STACK
+         if (n_args > 3) {
+             pin_intn = mp_hal_get_pin_obj(args[3]);
+@@ -738,16 +730,10 @@ STATIC mp_obj_t wiznet5k_make_new(const mp_obj_type_t *type, size_t n_args, size
+         #endif
+     }
+ 
+-    mp_hal_pin_output(cs);
+-    mp_hal_pin_output(rst);
+-
+     // Init the wiznet5k object
+     wiznet5k_obj.base.type = (mp_obj_type_t *)&mod_network_nic_type_wiznet5k;
+     wiznet5k_obj.cris_state = 0;
+-    wiznet5k_obj.spi = spi;
+-    wiznet5k_obj.spi_transfer = ((mp_machine_spi_p_t *)MP_OBJ_TYPE_GET_SLOT(spi->type, protocol))->transfer;
+-    wiznet5k_obj.cs = cs;
+-    wiznet5k_obj.rst = rst;
++
+     #if WIZNET5K_WITH_LWIP_STACK
+     wiznet5k_obj.pin_intn = pin_intn;
+     wiznet5k_obj.use_interrupt = use_interrupt;
+@@ -810,6 +796,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(wiznet5k_isconnected_obj, wiznet5k_isconnected)
+ 
+ STATIC mp_obj_t wiznet5k_active(size_t n_args, const mp_obj_t *args) {
+     wiznet5k_obj_t *self = MP_OBJ_TO_PTR(args[0]);
++
+     if (n_args == 1) {
+         return mp_obj_new_bool(IS_ACTIVE(self));
+     } else {
+@@ -817,11 +804,12 @@ STATIC mp_obj_t wiznet5k_active(size_t n_args, const mp_obj_t *args) {
+             if (!IS_ACTIVE(self)) {
+                 /*!< Wiznet initialisation */
+                 // Reset the chip
+-                mp_hal_pin_low(wiznet5k_obj.rst);
+-                mp_hal_delay_ms(1); // datasheet says 2us
+-                mp_hal_pin_high(wiznet5k_obj.rst);
+-                mp_hal_delay_ms(160); // datasheet says 150ms
++               	microbit_wiznet_ctrl_rst(0);
+ 
++		mp_hal_delay_ms(100); // datasheet says 2us
++               	microbit_wiznet_ctrl_rst(1);
++		mp_hal_delay_ms(150); // datasheet says 2us
++				
+                 // Set physical interface callbacks
+                 reg_wizchip_cris_cbfunc(wiz_cris_enter, wiz_cris_exit);
+                 reg_wizchip_cs_cbfunc(wiz_cs_select, wiz_cs_deselect);
+@@ -839,13 +827,13 @@ STATIC mp_obj_t wiznet5k_active(size_t n_args, const mp_obj_t *args) {
+                 #endif
+                 getSHAR(mac);
+                 if ((mac[0] | mac[1] | mac[2] | mac[3] | mac[4] | mac[5]) == 0) {
+-                    mp_hal_get_mac(MP_HAL_MAC_ETH0, mac);
++                    mp_hal_get_mac(0x03, mac);
+                     setSHAR(mac);
+-                }
+-
++             	}
+                 // seems we need a small delay after init
+                 mp_hal_delay_ms(250);
+ 
++
+             }
+         } else {
+             #if WIZNET5K_WITH_LWIP_STACK
+diff --git a/py/runtime.c b/py/runtime.c
+index 23fae6041..5f87b4563 100644
+--- a/py/runtime.c
++++ b/py/runtime.c
+@@ -45,6 +45,8 @@
+ #include "py/stackctrl.h"
+ #include "py/gc.h"
+ 
++#include "extmod/modnetwork.h"
++
+ #if MICROPY_DEBUG_VERBOSE // print debugging info
+ #define DEBUG_PRINT (1)
+ #define DEBUG_printf DEBUG_printf
+@@ -176,6 +178,10 @@ void mp_init(void) {
+     MICROPY_PORT_INIT_FUNC;
+     #endif
+ 
++    #if MICROPY_PY_NETWORK
++    mod_network_init();
++    #endif
++
+     MP_THREAD_GIL_ENTER();
+ }
+ 
