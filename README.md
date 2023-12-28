@@ -1,55 +1,154 @@
-MicroPython on the micro:bit via CODAL
-======================================
 
-This is a port of MicroPython to the micro:bit which uses the CODAL as the
-underlying target platform.
+<a name="Ethernet_Example_Getting_Started"></a>
+Ethernet Example Getting Started
+===========================
 
-Setting up
-----------
 
-After cloning this repository update the submodules:
+These sections will guide you through a series of steps from configuring development environment to running ethernet examples using the **micro:bit with WIZnet's ethernet products**.
 
-    $ git submodule update --init
 
-Then build the MicroPython cross-compiler:
+- [Ethernet Example Getting Started](#ethernet-example-getting-started)
+- [Hardware requirements](#hardware-requirements)
+- [Development environment configuration](#development-environment-configuration)
+- [Wiznet5K Library](#wiznet5k-library)
+  - [Building](#building)
+  - [Deploying firmware to the device](#deploying-firmware-to-the-device)
+- [Ethernet example structure](#ethernet-example-structure)
 
-    $ make -C lib/micropython/mpy-cross
 
-Note: you may need to add to the line above `PYTHON=python` (or some variant
-thereof) to select your Python executable (this defaults to `python3`); for
-example:
 
-    $ make -C lib/micropython/mpy-cross PYTHON=python
 
-Building and running
---------------------
+<a name="hardware_requirements"></a>
 
-After setting up, go to the `src/` directory and build
-(as above, you may need to add `PYTHON=python` to the `make` command):
+# Hardware requirements
 
-    $ cd src
-    $ make
 
-That will build both `libmicropython.a` (from source in `src/codal_port/`) and
-the CODAL app (from source in `src/codal_app/`).  The resulting firmware will be
-`MICROBIT.hex` in the `src/` directory which can be copied to the micro:bit.
+The Ethernet examples make use of the WIZnet Ethernet Products' Ethernet I/O module, which incorporates WIZnet's [__W5100S__][link-w5100s] or [__W5500__][link-w5500] Ethernet chip, in conjunction with the __micro:bit__ board.
 
-Once the firmware is on the device there will appear a REPL prompt on the serial
-port.  To test it you can run:
 
-    >>> display.show(Image.HAPPY)
-    >>> audio.play(Sound.HAPPY)
-    
-Code of Conduct
--------------------
+### Pin Diagram
 
-Trust, partnership, simplicity and passion are our core values we live and 
-breathe in our daily work life and within our projects. Our open-source 
-projects are no exception. We have an active community which spans the globe 
-and we welcome and encourage participation and contributions to our projects 
-by everyone. We work to foster a positive, open, inclusive and supportive 
-environment and trust that our community respects the micro:bit code of conduct. 
+[link-microbit_pinmap]
 
-Please see our [code of conduct](https://microbit.org/safeguarding/) which 
-outlines our expectations for all those that participate in our community and 
-details on how to report any concerns and what would happen should breaches occur.
+
+| I/O  | Pin Name | Descri  ption                       |
+| :--- | -------- | ------------------------------------|
+| O    | P_16   | Connected to **CSn**  on WIZnet Chip|
+| O    | P_15   | Connected to **MOSI** on WIZnet Chip|
+| I    | P_14   | Connected to **MISO** on WIZnet Chip|
+| O    | P_13   | Connected to **SCLK** on WIZnet Chip|
+| O    | P_12   | Connected to **RSTn** on WIZnet Chip|
+| I    | P_9    | Connected to **INTn** on WIZnet Chip|
+
+
+<a name="development_environment_configuration"></a>
+
+# Development environment configuration
+To test the ethernet examples, the development environment must be configured to micro:bit and WIZnet.
+
+- Required development environment
+   - [Thonny](https://thonny.org/) (that makes it easier to use micropython) 
+- If you must be need to compile the micropython ,your pc should be use Linux or Unix environment.
+
+    To compile microbit-micropython, use a Docker image instead of setting up a separate environment. For instructions on how to use Docker, refer to the following Git page.
+    - [docker-microbit-toolchain](https://github.com/carlosperate/docker-microbit-toolchain?tab=readme-ov-file#how-to-use-this-docker-image-with-github-codespaces)
+
+
+------
+
+<a name="wiznet5k"></a>
+# Wiznet5K Library
+
+<a name="Building"></a>
+## Building
+
+1. Download
+
+If the ethernet examples are cloned, the library set as a submodule is an empty directory. Therefore, if you want to download the library set as a submodule together, clone the ethernet examples with the following Git command.
+
+```cpp
+/* Change directory */
+// change to the directory to clone
+$ cd [user path]
+
+/* Clone */
+$ git clone https://github.com/Wiznet/micropython-microbit-v2.git
+```
+2. Patch
+
+Some libraries configured as submodules need to be manually patched using the Git commands found in their respective library directories. To do this, execute the shell script provided below. This action is only required to be performed once.
+
+ ```cpp
+$ cd micropython-microbit-v2
+$ git submodule init
+$ git submodule update
+$ ./run_patchs.sh
+ 
+ ```
+
+3. compile
+
+The build steps from this example have been obtained from [the project README](https://github.com/microbit-foundation/micropython-microbit-v2/blob/v2.0.0-beta.1/README.md).
+Proceed with the compilation.
+
+```cpp
+# First we prepare the project, this initial docker command only has to be run once
+$ docker run -v $(pwd):/home --rm ghcr.io/carlosperate/microbit-toolchain:latest make -C lib/micropython/mpy-cross
+# Now we are ready to build using the Makefile in the src folder
+$ docker run -v $(pwd):/home --rm ghcr.io/carlosperate/microbit-toolchain:latest make -C src
+
+```
+
+The compilation is finished, a `MICROBIT.hex`file will be generated in the `/src`directory.
+
+<a name="Deploying firmware to the device"></a>
+## Deploying firmware to the device
+
+If you want to use the firmware without build, you can use the below firmware.
+
+ - Releases : https://github.com/Wiznet/micropython-microbit-v2/releases/
+
+Upload the `MICROBIT.hex` firmware to the micro:bit board. Connecting the micro:bit board to your PC. Copy the firmware into the microbit folder.
+
+<a name="ethernet_example_structure"></a>
+
+# Ethernet example structure
+
+Ethernet examples are available at [micropython-microbit-v2/examples](https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples) directory. As of now, following examples are provided.
+
+- [**Loopback**][link-loopback]
+- [**DHCP**][link-DHCP]
+- [**HTTP**][link-HTTP]
+  - [WebServer][link-WebServer]
+  - [WebClient][link-WebClient]
+- [**MQTT**][link-MQTT]
+  - [Publish][link-MQTT_Pub]
+  - [Subscribe][link-MQTT_Sub]
+
+<a name="Ethernet_example_testing"></a>
+
+_[▲ Back to Top](#Ethernet_Example_Getting_Started)_ 
+
+<!--
+
+Link
+
+-->
+
+[link-Installing Micropython]:https://thonny.org/
+[link-w5100s]: https://docs.wiznet.io/Product/iEthernet/W5100S/overview
+[link-w5500]: https://docs.wiznet.io/Product/iEthernet/W5500/overview
+
+[link-microbit_pinmap]: https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/Loopback
+[link-loopback]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/Loopback
+[link-DHCP]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/DHCP
+[link-UPIP]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/UPIP
+[link-HTTP]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/HTTP
+[link-WebServer]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/HTTP/HTTP_Server
+[link-WebClient]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/HTTP/HTTP_Client
+[link-MQTT]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/MQTT
+[link-MQTT_Pub]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/MQTT/Publish
+[link-MQTT_Sub]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/MQTT/Subscribe
+
+
+

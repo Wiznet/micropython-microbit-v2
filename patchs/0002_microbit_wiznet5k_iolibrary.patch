@@ -1,0 +1,43 @@
+diff --git a/Ethernet/W5100S/w5100s.h b/Ethernet/W5100S/w5100s.h
+index 10561e4..38a0eaa 100644
+--- a/Ethernet/W5100S/w5100s.h
++++ b/Ethernet/W5100S/w5100s.h
+@@ -342,7 +342,7 @@ extern "C" {
+  * </table>
+  * - \ref IR2_WOL : WOL MAGIC PACKET Interrupt Mask
+  */
+-#define IR2					(_W5100S_IO_BASE_ + (0x0020))
++#define wiz_IR2					(_W5100S_IO_BASE_ + (0x0020))
+ 
+ /**
+  * @ingroup Common_register_group_W5100S
+@@ -2101,7 +2101,7 @@ void     WIZCHIP_WRITE_BUF(uint32_t AddrSel, uint8_t* pBuf, uint16_t len);
+  * @sa getIR2()
+  */
+ #define setIR2(ir2) \
+-		WIZCHIP_WRITE(IR2, ir2)
++		WIZCHIP_WRITE(wiz_IR2, ir2)
+ 
+ /**
+  * @ingroup Common_register_access_function_W5100S
+@@ -2110,7 +2110,7 @@ void     WIZCHIP_WRITE_BUF(uint32_t AddrSel, uint8_t* pBuf, uint16_t len);
+  * @sa setIR2()
+  */
+ #define getIR2() \
+-		WIZCHIP_READ(IR2)
++		WIZCHIP_READ(wiz_IR2)
+ 
+ /**
+  * @ingroup Common_register_access_function_W5100S
+diff --git a/Ethernet/wizchip_conf.h b/Ethernet/wizchip_conf.h
+index 42e56d0..6036018 100644
+--- a/Ethernet/wizchip_conf.h
++++ b/Ethernet/wizchip_conf.h
+@@ -70,6 +70,7 @@ extern "C" {
+ #define W5200						5200
+ #define W5300						5300
+ #define W5500						5500
++#define WIZCHIP_PREFIXED_EXPORTS        (1)
+ 
+ #ifndef _WIZCHIP_
+ #define _WIZCHIP_                      W5500   // W5100, W5100S, W5200, W5300, W5500
