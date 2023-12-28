@@ -26,7 +26,7 @@ To test the **Webclient example**, minor settings shall be done in code.
 ![][link-thonny_http]
 
 2. Create a new file by pressing the **New File** button. Copy the ***urequest.py*** library code into it. You can access the *urequest* library code in the following derectory. 
-    - __[examples/Http/lib](https://github.com/Wiznet/micropython-microbit-v2/blob/main/examples/Http/lib)__
+    - __[examples/Http/lib](https://github.com/Wiznet/micropython-microbit-v2/blob/master/examples/Http/lib)__
 
 3. Initialize device network informaion.
 
@@ -57,12 +57,7 @@ def w5x00_init():
 ## Step 4: Upload and Run
 
 1. Use DNS to access the address of the server. After that, it accesses the server in each URL and prints the contents. The text of each URL is as follows.
-
 ![][link-webclient_1]
-
- [**¢¸ Go to Ethernet example structure**](#ethernet_example_structure)
-
-
 
 
 <!--
@@ -71,7 +66,7 @@ Link
 
 [link-thonny]: https://thonny.org/
 
-[link-thonny_http]: https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/HTTP/Thonny_conf_1.png
-[link-webclient_1]: https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/HTTP/webclient_1.png
+[link-thonny_http]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Thonny_conf_1.png
+[link-webclient_1]: https://github.com/Wiznet/micropython-microbit-v2/blob/maeter/static/images/webclient_1.png
 
 

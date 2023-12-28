@@ -107,11 +107,6 @@ def client_loop():
 ![][link-loopback_client_3]
 
 
- [**¢¸ Go to Ethernet example structure**](#ethernet_example_structure)
-
-
-
-
 <!--
 Link
 -->
@@ -119,13 +114,13 @@ Link
 [link-thonny]: https://thonny.org/
 [link-hercules]: https://www.hw-group.com/software/hercules-setup-utility
 
-[link-thonny_config]: https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Thonny_conf_1.png
+[link-thonny_config]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Thonny_conf_1.png
 
-[link-loopback_server_1]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Loopback_server_1.png
-[link-loopback_server_2]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Loopback_server_2.png
-[link-loopback_server_3]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Loopback_server_3.png
+[link-loopback_server_1]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Loopback_server_1.png
+[link-loopback_server_2]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Loopback_server_2.png
+[link-loopback_server_3]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Loopback_server_3.png
 
-[link-loopback_client_1]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Loopback_client_1.png
-[link-loopback_client_2]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Loopback_client_2.png
-[link-loopback_client_3]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Loopback_client_3.png
+[link-loopback_client_1]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Loopback_client_1.png
+[link-loopback_client_2]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Loopback_client_2.png
+[link-loopback_client_3]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Loopback_client_3.png
 

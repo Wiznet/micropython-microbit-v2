@@ -72,11 +72,6 @@ def loopback ():
 
 
 
- [**¢¸ Go to Ethernet example structure**](#ethernet_example_structure)
-
-
-
-
 <!--
 Link
 -->
@@ -84,8 +79,8 @@ Link
 [link-thonny]: https://thonny.org/
 [link-hercules]: https://www.hw-group.com/software/hercules-setup-utility
 
-[link-thonny_config]: https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Thonny_conf_1.png
+[link-thonny_config]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Thonny_conf_1.png
 
-[link-loopback_udp_1]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Loopback_udp_1.png
-[link-loopback_udp_2]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Loopback_udp_2.png
-[link-loopback_udp_3]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Loopback_udp_3.png
+[link-loopback_udp_1]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Loopback_udp_1.png
+[link-loopback_udp_2]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Loopback_udp_2.png
+[link-loopback_udp_3]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Loopback_udp_3.png

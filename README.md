@@ -27,9 +27,7 @@ The Ethernet examples make use of the WIZnet Ethernet Products' Ethernet I/O mod
 
 
 ### Pin Diagram
-
-[link-microbit_pinmap]
-
+<img src="https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/microbit_pinmap.png" width="50%" height="50%">
 
 | I/O  | Pin Name | Descri  ption                       |
 | :--- | -------- | ------------------------------------|
@@ -114,9 +112,10 @@ Upload the `MICROBIT.hex` firmware to the micro:bit board. Connecting the micro:
 
 # Ethernet example structure
 
-Ethernet examples are available at [micropython-microbit-v2/examples](https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples) directory. As of now, following examples are provided.
+Ethernet examples are available at __[micropython-microbit-v2/examples](https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples)__ directory. As of now, following examples are provided.
 
-- [**Loopback**][link-loopback]
+- [**TCP**][link-tcp]
+- [**UDP**][link-udp]
 - [**DHCP**][link-DHCP]
 - [**HTTP**][link-HTTP]
   - [WebServer][link-WebServer]
@@ -126,8 +125,6 @@ Ethernet examples are available at [micropython-microbit-v2/examples](https://gi
   - [Subscribe][link-MQTT_Sub]
 
 <a name="Ethernet_example_testing"></a>
-
-_[▲ Back to Top](#Ethernet_Example_Getting_Started)_ 
 
 <!--
 
@@ -139,16 +136,17 @@ Link
 [link-w5100s]: https://docs.wiznet.io/Product/iEthernet/W5100S/overview
 [link-w5500]: https://docs.wiznet.io/Product/iEthernet/W5500/overview
 
-[link-microbit_pinmap]: https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/Loopback
-[link-loopback]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/Loopback
-[link-DHCP]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/DHCP
-[link-UPIP]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/UPIP
-[link-HTTP]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/HTTP
-[link-WebServer]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/HTTP/HTTP_Server
-[link-WebClient]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/HTTP/HTTP_Client
-[link-MQTT]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/MQTT
-[link-MQTT_Pub]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/MQTT/Publish
-[link-MQTT_Sub]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/MQTT/Subscribe
+[link-microbit_pinmap]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/microbit_pinmap.png
+
+[link-tcp]:https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples/TCP
+[link-udp]:https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples/UDP
+[link-DHCP]:https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples/DHCP
+[link-HTTP]:https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples/Http
+[link-WebServer]:https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples/Http/server
+[link-WebClient]:https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples/Http/client
+[link-MQTT]:https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples/Mqtt
+[link-MQTT_Pub]:https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples/Mqtt/Publish
+[link-MQTT_Sub]:https://github.com/Wiznet/micropython-microbit-v2/tree/master/examples/Mqtt/Subscribe
 
 
 

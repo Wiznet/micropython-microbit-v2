@@ -24,7 +24,7 @@ To test the **Webserver example**, minor settings shall be done in code.
 ![][link-thonny_http]
 
 2. Create a new file by pressing the **New File** button. Copy the ***urequest.py*** library code into it. You can access the *urequest* library code in the following derectory. 
-    - __[examples/Http/lib](https://github.com/Wiznet/micropython-microbit-v2/blob/main/examples/Http/lib)__
+    - __[examples/Http/lib](https://github.com/Wiznet/micropython-microbit-v2/blob/master/examples/Http/lib)__
 
 
 3. Initialize device network informaion.
@@ -75,14 +75,10 @@ When you execute the code, it launches a web server. You connect to the device w
 
 
 
- [**¢¸ Go to Ethernet example structure**](#ethernet_example_structure)
-
-
-
 <!--
 Link
 -->
 
 [link-thonny]: https://thonny.org/
-[link-thonny_http]: https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/Thonny_conf_1.png
-[link-webserver_1]: https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/webserver_1.png
+[link-thonny_http]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Thonny_conf_1.png
+[link-webserver_1]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/webserver_1.png

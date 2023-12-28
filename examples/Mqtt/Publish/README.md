@@ -24,7 +24,7 @@ To test the **MQTT Publish example**, minor settings shall be done in code.
 ![][link-thonny_config]
 
 2. Create a new file by pressing the **New File** button. Copy the ***umqttsimple.py*** library code into it. You can access the *umqttsimple* library code in the following derectory. 
-    - __[examples/Mqtt/lib](https://github.com/Wiznet/micropython-microbit-v2/blob/main/examples/Mqtt/lib)__
+    - __[examples/Mqtt/lib](https://github.com/Wiznet/micropython-microbit-v2/blob/master/examples/Mqtt/lib)__
 
 
 3. Initialize device network informaion.
@@ -119,11 +119,11 @@ Link
 [link-thonny]: https://thonny.org/
 [link-mosquitto]: https://mosquitto.org/download/
 
-[link-thonny_config]:https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/MQTT/Thonny_conf_1.png
-[link-mqtt_1]: https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/MQTT/MQTT_broker.png
-[link-mqtt_2]: https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/MQTT/MQTT_pub1.png
-[link-mqtt_3]:  https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/MQTT/MQTT_pub2.png
-[link-mqtt_conf]: https://github.com/Wiznet/micropython-microbit-v2/blob/main/static/images/MQTT/MQTT_conf.png
+[link-thonny_config]:https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Thonny_conf_1.png
+[link-mqtt_1]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/MQTT_broker.png
+[link-mqtt_2]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/MQTT_pub1.png
+[link-mqtt_3]:  https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/MQTT_pub2.png
+[link-mqtt_conf]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/MQTT_conf.png
 
 [link-authentication_methods]: https://mosquitto.org/documentation/authentication-methods/
 
