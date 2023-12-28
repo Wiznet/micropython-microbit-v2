@@ -67,6 +67,6 @@ Link
 [link-thonny]: https://thonny.org/
 
 [link-thonny_http]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/Thonny_conf_1.png
-[link-webclient_1]: https://github.com/Wiznet/micropython-microbit-v2/blob/maeter/static/images/webclient_1.png
+[link-webclient_1]: https://github.com/Wiznet/micropython-microbit-v2/blob/master/static/images/webclient_1.png
 
 
