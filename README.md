@@ -1,5 +1,6 @@
 
 <a name="Ethernet_Example_Getting_Started"></a>
+
 Ethernet Example Getting Started
 ===========================
 
@@ -139,16 +140,15 @@ Link
 [link-w5100s]: https://docs.wiznet.io/Product/iEthernet/W5100S/overview
 [link-w5500]: https://docs.wiznet.io/Product/iEthernet/W5500/overview
 
-[link-microbit_pinmap]: https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/Loopback
-[link-loopback]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/Loopback
-[link-DHCP]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/DHCP
-[link-UPIP]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/UPIP
-[link-HTTP]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/HTTP
-[link-WebServer]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/HTTP/HTTP_Server
-[link-WebClient]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/HTTP/HTTP_Client
-[link-MQTT]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/MQTT
-[link-MQTT_Pub]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/MQTT/Publish
-[link-MQTT_Sub]:https://github.com/Wiznet/RP2040-HAT-MicroPython/tree/main/examples/MQTT/Subscribe
+[link-microbit_pinmap]:https://github.com/Wiznet/micropython-microbit-v2/tree/main/static/images/microbit_pinmap.png
+[link-loopback]:https://github.com/Wiznet/micropython-microbit-v2/tree/main/examples/Loopback
+[link-DHCP]:https://github.com/Wiznet/micropython-microbit-v2/tree/main/examples/DHCP
+[link-HTTP]:https://github.com/Wiznet/micropython-microbit-v2/tree/main/examples/Http
+[link-WebServer]:https://github.com/Wiznet/micropython-microbit-v2/tree/main/examples/Http/server
+[link-WebClient]:https://github.com/Wiznet/micropython-microbit-v2/tree/main/examples/Http/client
+[link-MQTT]:https://github.com/Wiznet/micropython-microbit-v2/tree/main/examples/Mqtt
+[link-MQTT_Pub]:https://github.com/Wiznet/micropython-microbit-v2/tree/main/examples/Mqtt/Publish
+[link-MQTT_Sub]:https://github.com/Wiznet/micropython-microbit-v2/tree/main/examples/Mqtt/Subscribe
 
 
 
