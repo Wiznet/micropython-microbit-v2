@@ -72,6 +72,7 @@ $ cd [user path]
 /* Clone */
 $ git clone https://github.com/Wiznet/micropython-microbit-v2.git
 ```
+
 2. Patch
 
 Some libraries configured as submodules need to be manually patched using the Git commands found in their respective library directories. To do this, execute the shell script provided below. This action is only required to be performed once.
@@ -84,7 +85,21 @@ $ ./run_patchs.sh
  
  ```
 
-3. compile
+
+3. configuring the chip version
+
+The patch is complete, enter the information for the WIZnet chip you are using. Input the Chip Version `W5100S or W5500` in the file at the following path.
+
+- lib/micropython/lib/wiznet5k/Ethernet/wizchip_conf.h
+- src/codal_port/mpconfigport.h
+
+
+```cpp
+#define _WIZCHIP_                      W5100S   // W5100, W5100S, W5200, W5300, W5500
+```
+
+
+4. compile
 
 The build steps from this example have been obtained from [the project README](https://github.com/microbit-foundation/micropython-microbit-v2/blob/v2.0.0-beta.1/README.md).
 Proceed with the compilation.
